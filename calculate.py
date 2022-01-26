@@ -12,6 +12,12 @@ total_btc_bought = 0
 total_price_paid_btc = 0
 total_btc_sold = 0
 total_price_paid_sold = 0
+
+total_eth_bought = 0
+total_price_paid_eth = 0
+total_eth_sold = 0
+total_price_paid_sold_eth = 0
+
 for item in data:
     important_data = item.strip().split(',')
     important_data = important_data[1:5]
@@ -29,6 +35,14 @@ for item in data:
     if _to == 'CAD' and _from == 'BTC':
         total_btc_sold += _to_amount
         total_price_paid_sold += _from_amount
+    
+    if _to == 'ETH' and _from == 'CAD':
+        total_eth_bought += _to_amount
+        total_price_paid_eth += _from_amount
+    
+    if _to == 'CAD' and _from == 'ETH':
+        total_eth_sold += _to_amount
+        total_price_paid_eth += _from_amount
 
 columns = None
 data = []
@@ -58,6 +72,18 @@ for item in data:
         total_btc_sold += _to_amount
         total_price_paid_sold += _from_amount
 
+    if _to == '"ETH"' and _from == '"CAD"':
+        total_eth_bought += _to_amount
+        total_price_paid_eth += _from_amount
+
+    if _to == '"CAD"' and _from == '"ETH"':
+        total_eth_sold += _to_amount
+        total_price_paid_sold_eth += _from_amount
+
 print('Total BTC bought:', total_btc_bought)
 print('Total CAD spent:', total_price_paid_btc)
 print('price per bitcoin', total_price_paid_btc / total_btc_bought)
+
+print('Total ETH bought:', total_eth_bought)
+print('Total CAD spent:', total_price_paid_eth)
+print('price per ETH', total_price_paid_eth / total_eth_bought)
